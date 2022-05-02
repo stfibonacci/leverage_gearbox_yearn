@@ -23,6 +23,7 @@ contract LeverageGearboxYearn is ERC4626, Ownable {
         address _creditManager,
         uint256 _leverage
     ) ERC4626(_asset, " Leverage Gearbox Yearn DAI", "lgyDAI") {
+        require(address(_asset) != address(0));
         require(_yearnAdapter != address(0));
         require(_creditManager != address(0));
         require(
