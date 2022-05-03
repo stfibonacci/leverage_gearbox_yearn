@@ -26,10 +26,7 @@ contract LeverageGearboxYearn is ERC4626, Ownable {
         require(address(_asset) != address(0), "ZERO_ADDRESS");
         require(_yearnAdapter != address(0), "ZERO_ADDRESS");
         require(_creditManager != address(0), "ZERO_ADDRESS");
-        require(
-            _leverage >= 100 && _leverage <= 300,
-            "leverage must be between 100 and 300"
-        );
+        require(_leverage > 0 && _leverage <= 300, "MAX_LEVERAGE = 300");
 
         yearnAdapter = IYVault(_yearnAdapter);
         creditManager = ICreditManager(_creditManager);
