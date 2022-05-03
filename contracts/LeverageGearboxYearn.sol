@@ -23,9 +23,9 @@ contract LeverageGearboxYearn is ERC4626, Ownable {
         address _creditManager,
         uint256 _leverage
     ) ERC4626(_asset, " Leverage Gearbox Yearn DAI", "lgyDAI") {
-        require(address(_asset) != address(0));
-        require(_yearnAdapter != address(0));
-        require(_creditManager != address(0));
+        require(address(_asset) != address(0), "ZERO_ADDRESS");
+        require(_yearnAdapter != address(0), "ZERO_ADDRESS");
+        require(_creditManager != address(0), "ZERO_ADDRESS");
         require(
             _leverage >= 100 && _leverage <= 300,
             "leverage must be between 100 and 300"
@@ -55,7 +55,7 @@ contract LeverageGearboxYearn is ERC4626, Ownable {
         yearnAdapter.deposit(_assets);
     }
 
-    function withdrawFromYearn() public onlyAuthorized {
+    function withdrawFromYearn() external onlyAuthorized {
         uint256 yShares = yearnAdapter.balanceOf(creditAccount);
         require(yShares != 0, "ZERO_ySHARES");
         yearnAdapter.withdraw(yShares);
@@ -92,9 +92,10 @@ contract LeverageGearboxYearn is ERC4626, Ownable {
 
     function getCollateralValue() public view returns (uint256) {
         if (creditManager.hasOpenedCreditAccount(address(this))) {
-            uint256 totalValue = getTotalValue();
-            uint256 totalBorrwed = getBorrowedAmount();
-            return totalValue - totalBorrwed;
+            uint256 tV = getTotalValue();
+            uint256 tB = getBorrowedAmount();
+            uint256 tC = tV - tB;
+            return tC;
         } else {
             return 0;
         }

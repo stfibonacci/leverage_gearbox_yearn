@@ -7,7 +7,7 @@ def deploy_leverage_gerarbox_yearn():
     dai_address = "0x6b175474e89094c44da98b954eedeac495271d0f"
     yearn_dai_adapter = "0x403E98b110a4DC89da963394dC8518b5f0E2D5fB"
     creditManager = "0x777e23a2acb2fcbb35f6ccf98272d03c722ba6eb"
-    leverage = "300"
+    leverage = "200"
     leverage_gearbox_yearn = LeverageGearboxYearn.deploy(
         dai_address,
         yearn_dai_adapter,
@@ -57,10 +57,6 @@ def deploy_leverage_gerarbox_yearn():
     print(
         f"contract total dai balance: {leverage_gearbox_yearn.totalAssets()/ decimal} "
     )
-
-    alice_shares = leverage_gearbox_yearn.balanceOf(alice)
-    leverage_gearbox_yearn.redeem(alice_shares, alice, alice, {"from": alice})
-    print(f"alice dai balance is {dai.balanceOf(alice)/ decimal}")
 
 
 def main():
