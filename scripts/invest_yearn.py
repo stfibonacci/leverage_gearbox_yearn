@@ -17,17 +17,14 @@ def deploy_leverage_gerarbox_yearn():
     )
 
     decimal = 10 ** 18
-    a_amount = 20_000 * decimal
-    b_amount = 10_000 * decimal
-
+    amount = 20_000 * decimal
     alice = accounts[0]
-    bob = accounts[1]
-    dai_address = "0x6b175474e89094c44da98b954eedeac495271d0f"
-    dai = MintableForkToken(dai_address)
-    dai._mint_for_testing(alice, a_amount)
 
-    dai.approve(leverage_gearbox_yearn, a_amount, {"from": alice})
-    leverage_gearbox_yearn.deposit(a_amount, alice, {"from": alice})
+    dai = MintableForkToken(dai_address)
+    dai._mint_for_testing(alice, amount)
+
+    dai.approve(leverage_gearbox_yearn, amount, {"from": alice})
+    leverage_gearbox_yearn.deposit(amount, alice, {"from": alice})
 
     collateral_amount = leverage_gearbox_yearn.availableAssets() / 2
     print("Opening credit account ...")
