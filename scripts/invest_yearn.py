@@ -23,27 +23,44 @@ def deploy_leverage_gerarbox_yearn():
     dai = MintableForkToken(dai_address)
     dai._mint_for_testing(alice, amount)
 
+    print("Alice depositing 20K DAI to the contract ...")
     dai.approve(leverage_gearbox_yearn, amount, {"from": alice})
     leverage_gearbox_yearn.deposit(amount, alice, {"from": alice})
+    print(
+        f"Contract Available Balance: {leverage_gearbox_yearn.availableAssets() / decimal}"
+    )
 
     collateral_amount = leverage_gearbox_yearn.availableAssets() / 2
-    print("Opening credit account ...")
+    print("Opening credit account with 3X leverage and added 10K DAI ...")
     leverage_gearbox_yearn.openAccount(collateral_amount)
     print("Depositing into Yearn ...")
     leverage_gearbox_yearn.investToYearn()
 
     print("Credit account opened and invested into Yearn")
+    print(
+        f"Contract Available DAI balance: {leverage_gearbox_yearn.availableAssets()/ decimal} "
+    )
+    print(f"CA address: {leverage_gearbox_yearn.getCreditAccount()}")
     print(f"CA health factor: {leverage_gearbox_yearn.getHealthFactor() / 10 ** 4}")
+    print(f"CA collateral :{leverage_gearbox_yearn.getCollateralValue()/ decimal}")
     print(f"CA borrowed amount:{leverage_gearbox_yearn.getBorrowedAmount() / decimal}")
     print(f"CA total amount:{leverage_gearbox_yearn.getTotalValue() / decimal}")
-    print(f"CA collateral :{leverage_gearbox_yearn.getCollateralValue()/ decimal}")
 
-    print("Adding collateral ...")
+    print("Adding 10K DAI as collateral ...")
     leverage_gearbox_yearn.addCollateral(leverage_gearbox_yearn.availableAssets())
     print(
-        f"Current health factor: {leverage_gearbox_yearn.getHealthFactor() / 10 ** 4}"
+        f"Contract CA Available DAI balance: {leverage_gearbox_yearn.availableAssets()/ decimal} "
     )
-    print(f"Current collateral :{leverage_gearbox_yearn.getCollateralValue()/ decimal}")
+    print(
+        f"Current CA health factor: {leverage_gearbox_yearn.getHealthFactor() / 10 ** 4}"
+    )
+    print(
+        f"Current CA collateral :{leverage_gearbox_yearn.getCollateralValue()/ decimal}"
+    )
+    print(
+        f"Current CA borrowed amount:{leverage_gearbox_yearn.getBorrowedAmount() / decimal}"
+    )
+    print(f"Current CA total amount:{leverage_gearbox_yearn.getTotalValue() / decimal}")
 
     print("Withdrawing from Yearn ...")
     leverage_gearbox_yearn.withdrawFromYearn()
@@ -52,7 +69,7 @@ def deploy_leverage_gerarbox_yearn():
 
     print(f"CA address: {leverage_gearbox_yearn.getCreditAccount()}")
     print(
-        f"contract total dai balance: {leverage_gearbox_yearn.totalAssets()/ decimal} "
+        f"Contract Available DAI balance: {leverage_gearbox_yearn.availableAssets()/ decimal} "
     )
 
 
