@@ -1,12 +1,12 @@
-# Gearbox Yearn Leverage
+# Gearbox Leverage Yearn Strategy
 
 ## Overview
 
-This repo is only for learning purposes and not ready for production.
+This repo is only for learning purposes and isnot ready for production.
 
 You can find the medium article here:
 
-- [medium article]()
+- [article](https://medium.com/@0xstfibonacci/how-to-leverage-farm-on-yearn-with-gearbox-fd734eb747c7)
 
 ## Dependencies
 
@@ -18,7 +18,7 @@ You can find the medium article here:
 
 ## Installation
 
-Clone this repo
+Clone this repo:
 
 ```
 git clone https://github.com/stfibonacci/leverage_gearbox_yearn.git
@@ -31,11 +31,11 @@ get free infura account:
 
 - [Infura](https://infura.io/)
 
-You need install metamask and get your private key. Dont put real fund in this wallet.
+You need install metamask and get your private key. Don't put real fund in this wallet.
 
 - [metamask](https://metamask.io/)
 
-Add environment variables to the env file and dont send these to github.
+Create .env file, add environment variables and dont send these to github.
 
 ```bash
 export WEB3_INFURA_PROJECT_ID=<PROJECT_ID>
