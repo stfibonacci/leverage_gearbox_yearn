@@ -90,12 +90,16 @@ contract LeverageGearboxYearn is ERC4626, Ownable {
     function getCollateralValue() public view returns (uint256) {
         if (creditManager.hasOpenedCreditAccount(address(this))) {
             uint256 tV = getTotalValue();
-            uint256 tB = getBorrowedAmount();
-            uint256 tC = tV - tB;
+            uint256 tD = getRepayAmount();
+            uint256 tC = tV - tD;
             return tC;
         } else {
             return 0;
         }
+    }
+
+    function getRepayAmount() public view returns (uint256) {
+        return creditManager.calcRepayAmount(address(this), false);
     }
 
     function availableAssets() public view returns (uint256) {

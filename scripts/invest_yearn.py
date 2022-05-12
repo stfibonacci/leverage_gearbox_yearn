@@ -43,6 +43,9 @@ def deploy_leverage_gerarbox_yearn():
     print(f"CA address: {leverage_gearbox_yearn.getCreditAccount()}")
     print(f"CA health factor: {leverage_gearbox_yearn.getHealthFactor() / 10 ** 4}")
     print(f"CA collateral :{leverage_gearbox_yearn.getCollateralValue()/ decimal}")
+    print(
+        f"Current CA repay amount  :{leverage_gearbox_yearn.getRepayAmount()/ decimal}"
+    )
     print(f"CA borrowed amount:{leverage_gearbox_yearn.getBorrowedAmount() / decimal}")
     print(f"CA total amount:{leverage_gearbox_yearn.getTotalValue() / decimal}")
 
@@ -56,6 +59,9 @@ def deploy_leverage_gerarbox_yearn():
     )
     print(
         f"Current CA collateral :{leverage_gearbox_yearn.getCollateralValue()/ decimal}"
+    )
+    print(
+        f"Current CA repay amount  :{leverage_gearbox_yearn.getRepayAmount()/ decimal}"
     )
     print(
         f"Current CA borrowed amount:{leverage_gearbox_yearn.getBorrowedAmount() / decimal}"
